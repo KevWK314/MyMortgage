@@ -1,0 +1,81 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMortgage.Calculator", "MyMortgage.Calculator\MyMortgage.Calculator.csproj", "{3B5301A4-2E78-485D-9414-6EA4E7C81691}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMortgage.Runner", "MyMortgage.Runner\MyMortgage.Runner.csproj", "{96F81D65-E603-4626-9CF3-3E9EDB892498}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMortgage.Calculator.Nunit.Test", "MyMortgage.Calculator.Nunit.Test\MyMortgage.Calculator.Nunit.Test.csproj", "{9BAE5CF0-3E63-4EC3-AD55-2D07D6C53062}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RestApi", "RestApi", "{98822E52-8D22-4A16-9D02-D61A4783E5FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMortgage.RestApi.Common", "MyMortgage.RestApi.Common\MyMortgage.RestApi.Common.csproj", "{95B18C40-B414-4601-8DF6-A9CFC4C80618}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMortgage.RestApi.MsHttp", "MyMortgage.RestApi.MsHttp\MyMortgage.RestApi.MsHttp.csproj", "{B74B559D-191C-45BF-B9E1-EF28DA5CAD32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMortgage.RestApi.Client", "MyMortgage.RestApi.Client\MyMortgage.RestApi.Client.csproj", "{B662F7F3-4C97-4640-81DA-EEF7B7513E90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMortgage.Common", "MyMortgage.Common\MyMortgage.Common.csproj", "{7824B592-1D8A-4D6A-A252-93CB8D3619D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMortgage.RestApi.Runner", "MyMortgage.RestApi.Runner\MyMortgage.RestApi.Runner.csproj", "{DD4C108B-76B1-48C0-8A17-3386778A5A33}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Calculator", "Calculator", "{BDEFEE5D-793C-4334-AB2E-C0EE4D44213A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMortgage.RestApi.Specflow.Test", "MyMortgage.RestApi.Specflow.Test\MyMortgage.RestApi.Specflow.Test.csproj", "{B107F7EC-A515-45E1-8DE0-0BF77B5EC35B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B5301A4-2E78-485D-9414-6EA4E7C81691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B5301A4-2E78-485D-9414-6EA4E7C81691}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B5301A4-2E78-485D-9414-6EA4E7C81691}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B5301A4-2E78-485D-9414-6EA4E7C81691}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96F81D65-E603-4626-9CF3-3E9EDB892498}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96F81D65-E603-4626-9CF3-3E9EDB892498}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96F81D65-E603-4626-9CF3-3E9EDB892498}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96F81D65-E603-4626-9CF3-3E9EDB892498}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BAE5CF0-3E63-4EC3-AD55-2D07D6C53062}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BAE5CF0-3E63-4EC3-AD55-2D07D6C53062}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BAE5CF0-3E63-4EC3-AD55-2D07D6C53062}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BAE5CF0-3E63-4EC3-AD55-2D07D6C53062}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95B18C40-B414-4601-8DF6-A9CFC4C80618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95B18C40-B414-4601-8DF6-A9CFC4C80618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95B18C40-B414-4601-8DF6-A9CFC4C80618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95B18C40-B414-4601-8DF6-A9CFC4C80618}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B74B559D-191C-45BF-B9E1-EF28DA5CAD32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B74B559D-191C-45BF-B9E1-EF28DA5CAD32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B74B559D-191C-45BF-B9E1-EF28DA5CAD32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B74B559D-191C-45BF-B9E1-EF28DA5CAD32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B662F7F3-4C97-4640-81DA-EEF7B7513E90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B662F7F3-4C97-4640-81DA-EEF7B7513E90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B662F7F3-4C97-4640-81DA-EEF7B7513E90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B662F7F3-4C97-4640-81DA-EEF7B7513E90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7824B592-1D8A-4D6A-A252-93CB8D3619D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7824B592-1D8A-4D6A-A252-93CB8D3619D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7824B592-1D8A-4D6A-A252-93CB8D3619D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7824B592-1D8A-4D6A-A252-93CB8D3619D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DD4C108B-76B1-48C0-8A17-3386778A5A33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD4C108B-76B1-48C0-8A17-3386778A5A33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD4C108B-76B1-48C0-8A17-3386778A5A33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD4C108B-76B1-48C0-8A17-3386778A5A33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B107F7EC-A515-45E1-8DE0-0BF77B5EC35B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B107F7EC-A515-45E1-8DE0-0BF77B5EC35B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B107F7EC-A515-45E1-8DE0-0BF77B5EC35B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B107F7EC-A515-45E1-8DE0-0BF77B5EC35B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{95B18C40-B414-4601-8DF6-A9CFC4C80618} = {98822E52-8D22-4A16-9D02-D61A4783E5FA}
+		{B74B559D-191C-45BF-B9E1-EF28DA5CAD32} = {98822E52-8D22-4A16-9D02-D61A4783E5FA}
+		{B662F7F3-4C97-4640-81DA-EEF7B7513E90} = {98822E52-8D22-4A16-9D02-D61A4783E5FA}
+		{DD4C108B-76B1-48C0-8A17-3386778A5A33} = {98822E52-8D22-4A16-9D02-D61A4783E5FA}
+		{B107F7EC-A515-45E1-8DE0-0BF77B5EC35B} = {98822E52-8D22-4A16-9D02-D61A4783E5FA}
+		{3B5301A4-2E78-485D-9414-6EA4E7C81691} = {BDEFEE5D-793C-4334-AB2E-C0EE4D44213A}
+		{9BAE5CF0-3E63-4EC3-AD55-2D07D6C53062} = {BDEFEE5D-793C-4334-AB2E-C0EE4D44213A}
+	EndGlobalSection
+EndGlobal
