@@ -1,4 +1,6 @@
-﻿namespace MyMortgage.Runner
+﻿using System;
+
+namespace MyMortgage.Runner
 {
     class Program
     {
