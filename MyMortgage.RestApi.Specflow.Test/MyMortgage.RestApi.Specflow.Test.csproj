@@ -78,6 +78,10 @@
       <Project>{b74b559d-191c-45bf-b9e1-ef28da5cad32}</Project>
       <Name>MyMortgage.RestApi.MsHttp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyMortgage.RestApi.Nancy\MyMortgage.RestApi.Nancy.csproj">
+      <Project>{d2029dda-cbc9-4cb0-bb7a-d2e69ba64f5c}</Project>
+      <Name>MyMortgage.RestApi.Nancy</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

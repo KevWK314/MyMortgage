@@ -1,5 +1,4 @@
 ﻿using System;
-using MyMortgage.RestApi.MsHttp;
 
 namespace MyMortgage.RestApi.Runner
 {
@@ -7,7 +6,8 @@ namespace MyMortgage.RestApi.Runner
     {
         static void Main(string[] args)
         {
-            var runner = new MsHttpServiceRunner("http://localhost:8080/mymortgage");
+            var runnerFactory = new ServiceRunnerFactory("http://localhost:8000/mymortgage/");
+            var runner = runnerFactory.CreateServiceRunner();
             runner.Start();
 
             Console.WriteLine("The service is ready.");
