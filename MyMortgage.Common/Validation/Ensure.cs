@@ -2,9 +2,9 @@
 
 namespace MyMortgage.Common.Validation
 {
-    public static class Guard
+    public static class Ensure
     {
-        public static void Ensure(bool check, Func<Exception> exception)
+        public static void That(bool check, Func<Exception> exception)
         {
             if (!check)
             {

@@ -11,14 +11,7 @@ namespace MyMortgage.RestApi.Specflow.Test.Steps
         [AfterFeature]
         public static void AfterFeature()
         {
-            if (FeatureContext.Current.ContainsKey(ServiceContext))
-            {
-                var context = FeatureContext.Current[ServiceContext] as ServiceContext;
-                if (context != null)
-                {
-                    context.StopService();
-                }
-            }
+            StopService();
         }
 
         [Given(@"I have started the REST service")]
@@ -30,6 +23,25 @@ namespace MyMortgage.RestApi.Specflow.Test.Steps
                 context.StartService();
 
                 FeatureContext.Current[ServiceContext] = context;
+            }
+        }
+
+        [Given(@"I have stopped the REST service")]
+        public void GivenIHaveStoppedTheRestService()
+        {
+            StopService();
+        }
+
+        private static void StopService()
+        {
+            if (FeatureContext.Current.ContainsKey(ServiceContext))
+            {
+                var context = FeatureContext.Current[ServiceContext] as ServiceContext;
+                if (context != null)
+                {
+                    context.StopService();
+                    FeatureContext.Current.Remove(ServiceContext);
+                }
             }
         }
     }

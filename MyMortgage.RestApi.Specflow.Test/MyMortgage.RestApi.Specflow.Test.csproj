@@ -52,15 +52,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MonthlyPayments.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\PrincipleRemaining.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrincipleRemaining.feature</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\CommonSteps.cs" />
     <Compile Include="Steps\MonthlyPaymentSteps.cs" />
+    <Compile Include="Steps\PrincipleRemainingSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="Features\MonthlyPayments.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>MonthlyPayments.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\PrincipleRemaining.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>PrincipleRemaining.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

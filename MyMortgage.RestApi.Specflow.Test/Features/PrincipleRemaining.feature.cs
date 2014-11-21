@@ -19,20 +19,20 @@ namespace MyMortgage.RestApi.Specflow.Test.Features
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "1.9.0.77")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [NUnit.Framework.TestFixtureAttribute()]
-    [NUnit.Framework.DescriptionAttribute("MonthlyPayments")]
-    public partial class MonthlyPaymentsFeature
+    [NUnit.Framework.DescriptionAttribute("PrincipleRemaining")]
+    public partial class PrincipleRemainingFeature
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-#line 1 "MonthlyPayments.feature"
+#line 1 "PrincipleRemaining.feature"
 #line hidden
         
         [NUnit.Framework.TestFixtureSetUpAttribute()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "MonthlyPayments", "", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "PrincipleRemaining", "", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -65,10 +65,10 @@ namespace MyMortgage.RestApi.Specflow.Test.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Calculate Monthly payments")]
-        public virtual void CalculateMonthlyPayments()
+        [NUnit.Framework.DescriptionAttribute("Calculate principle remaining")]
+        public virtual void CalculatePrincipleRemaining()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculate Monthly payments", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculate principle remaining", ((string[])(null)));
 #line 3
 this.ScenarioSetup(scenarioInfo);
 #line 4
@@ -77,24 +77,28 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
                         "Principle",
                         "Rate",
-                        "DurationInYears"});
+                        "DurationInYears",
+                        "YearsAlreadyPaid",
+                        "MonthlyPayments"});
             table1.AddRow(new string[] {
                         "250000",
                         "3",
-                        "25"});
+                        "25",
+                        "20",
+                        "1185"});
 #line 5
- testRunner.When("I calculate the monthly payments for", ((string)(null)), table1, "When ");
+ testRunner.When("I calculate the principle remaining for", ((string)(null)), table1, "When ");
 #line 8
- testRunner.Then("the monthly payments should be 1185.528", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the principle remaining should be 65977.444", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Calculate Monthly payments with invalid data")]
-        public virtual void CalculateMonthlyPaymentsWithInvalidData()
+        [NUnit.Framework.DescriptionAttribute("Calculate principle remaining with invalid data")]
+        public virtual void CalculatePrincipleRemainingWithInvalidData()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculate Monthly payments with invalid data", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Calculate principle remaining with invalid data", ((string[])(null)));
 #line 10
 this.ScenarioSetup(scenarioInfo);
 #line 11
@@ -103,24 +107,28 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
                         "Principle",
                         "Rate",
-                        "DurationInYears"});
+                        "DurationInYears",
+                        "YearsAlreadyPaid",
+                        "MonthlyPayments"});
             table2.AddRow(new string[] {
                         "250000",
-                        "0",
-                        "25"});
+                        "3",
+                        "25",
+                        "-20",
+                        "1185"});
 #line 12
- testRunner.When("I calculate the monthly payments for", ((string)(null)), table2, "When ");
+ testRunner.When("I calculate the principle remaining for", ((string)(null)), table2, "When ");
 #line 15
- testRunner.Then("I should receive a monthly payments error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I should receive a principle remaining error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Monthly payments Server down error")]
-        public virtual void MonthlyPaymentsServerDownError()
+        [NUnit.Framework.DescriptionAttribute("Principle remaining server down error")]
+        public virtual void PrincipleRemainingServerDownError()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Monthly payments Server down error", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Principle remaining server down error", ((string[])(null)));
 #line 17
 this.ScenarioSetup(scenarioInfo);
 #line 18
@@ -129,15 +137,19 @@ this.ScenarioSetup(scenarioInfo);
             TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
                         "Principle",
                         "Rate",
-                        "DurationInYears"});
+                        "DurationInYears",
+                        "YearsAlreadyPaid",
+                        "MonthlyPayments"});
             table3.AddRow(new string[] {
                         "250000",
                         "3",
-                        "25"});
+                        "25",
+                        "20",
+                        "1185"});
 #line 19
- testRunner.When("I calculate the monthly payments for", ((string)(null)), table3, "When ");
+ testRunner.When("I calculate the principle remaining for", ((string)(null)), table3, "When ");
 #line 22
- testRunner.Then("I should receive a monthly payments error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("I should receive a principle remaining error", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

@@ -16,12 +16,25 @@ namespace MyMortgage.RestApi.Specflow.Test.Context
         public double GetMonthlyPayments(double principle, double rate, int durationInYears)
         {
             var req = new MonthlyPaymentsRequest
-                {
-                    Principle = principle,
-                    Rate = rate,
-                    DurationInMonths = durationInYears * 12
-                };
+            {
+                Principle = principle,
+                Rate = rate,
+                DurationInMonths = durationInYears * 12
+            };
             return _client.GetMonthlyPaymentAsync(req).Result;
+        }
+
+        public double GetPrincipleRemaining(double principle, double rate, int durationInYears, int yearsAlreadyPaid, double monthlyPayment)
+        {
+            var req = new PrincipleRemainingRequest
+            {
+                Principle = principle,
+                Rate = rate,
+                DurationInMonths = durationInYears * 12,
+                MonthsAlreadyPaid = yearsAlreadyPaid * 12,
+                MonthlyPayment = monthlyPayment
+            };
+            return _client.GetPrincipleRemainingAsync(req).Result;
         }
     }
 }

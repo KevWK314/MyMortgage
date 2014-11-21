@@ -19,8 +19,8 @@ namespace MyMortgage.RestApi.Common.Client
 
         public async Task<HttpWebResponse> SendRequest(string uri, RestMethod restMethod)
         {
-            Guard.Ensure(Value.StringIsNotEmpty(uri), () => new ArgumentException("uri"));
-            Guard.Ensure(Value.IsNotNull(restMethod), () => new ArgumentException("restMethod"));
+            Ensure.That(Value.StringIsNotEmpty(uri), () => new ArgumentException("uri"));
+            Ensure.That(Value.IsNotNull(restMethod), () => new ArgumentException("restMethod"));
 
             var webRequest = (HttpWebRequest)WebRequest.Create(GetActionUri(uri));
             webRequest.Method = restMethod.Method;
@@ -30,9 +30,9 @@ namespace MyMortgage.RestApi.Common.Client
 
         public async Task<HttpWebResponse> SendJsonRequest<TRequest>(string uri, RestMethod restMethod, TRequest request)
         {
-            Guard.Ensure(Value.StringIsNotEmpty(uri), () => new ArgumentException("uri"));
-            Guard.Ensure(Value.IsNotNull(restMethod), () => new ArgumentException("restMethod"));
-            Guard.Ensure(Value.IsNotNull(request), () => new ArgumentException("request"));
+            Ensure.That(Value.StringIsNotEmpty(uri), () => new ArgumentException("uri"));
+            Ensure.That(Value.IsNotNull(restMethod), () => new ArgumentException("restMethod"));
+            Ensure.That(Value.IsNotNull(request), () => new ArgumentException("request"));
 
             var serializer = new DataContractJsonSerializer(typeof(TRequest));
             var webRequest = (HttpWebRequest)WebRequest.Create(GetActionUri(uri));
@@ -45,7 +45,7 @@ namespace MyMortgage.RestApi.Common.Client
 
         public TResult GetResponseResult<TResult>(HttpWebResponse response)
         {
-            Guard.Ensure(Value.IsNotNull(response), () => new ArgumentException("response"));
+            Ensure.That(Value.IsNotNull(response), () => new ArgumentException("response"));
 
             var serializer = new DataContractJsonSerializer(typeof(TResult));
             var res = serializer.ReadObject(response.GetResponseStream());

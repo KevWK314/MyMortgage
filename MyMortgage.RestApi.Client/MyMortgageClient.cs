@@ -24,7 +24,7 @@ namespace MyMortgage.RestApi.Client
 
         public async Task<double> GetMonthlyPaymentAsync(MonthlyPaymentsRequest req)
         {
-            Guard.Ensure(Value.IsNotNull(req), () => new ArgumentNullException("req"));
+            Ensure.That(Value.IsNotNull(req), () => new ArgumentNullException("req"));
 
             var response = await _restClientService.SendJsonRequest("monthlyPayment", RestMethod.Post, req);
             var result = _restClientService.GetResponseResult<double>(response);
@@ -33,7 +33,7 @@ namespace MyMortgage.RestApi.Client
 
         public async Task<double> GetPrincipleRemainingAsync(PrincipleRemainingRequest req)
         {
-            Guard.Ensure(Value.IsNotNull(req), () => new ArgumentNullException("req"));
+            Ensure.That(Value.IsNotNull(req), () => new ArgumentNullException("req"));
 
             var response = await _restClientService.SendJsonRequest("principleRemaining", RestMethod.Post, req);
             var result = _restClientService.GetResponseResult<double>(response);
