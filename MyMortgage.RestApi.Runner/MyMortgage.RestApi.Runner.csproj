@@ -33,6 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -44,11 +45,16 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceRunnerFactory.cs" />
+    <Compile Include="ServiceRunnerType.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyMortgage.Common\MyMortgage.Common.csproj">
+      <Project>{7824b592-1d8a-4d6a-a252-93cb8d3619d3}</Project>
+      <Name>MyMortgage.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyMortgage.RestApi.Common\MyMortgage.RestApi.Common.csproj">
       <Project>{95b18c40-b414-4601-8df6-a9cfc4c80618}</Project>
       <Name>MyMortgage.RestApi.Common</Name>

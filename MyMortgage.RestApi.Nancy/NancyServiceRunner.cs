@@ -9,6 +9,11 @@ namespace MyMortgage.RestApi.Nancy
         private readonly string _baseUri;
         private NancyHost _host;
 
+        public string Name
+        {
+            get { return "Nancy"; }
+        }
+
         public NancyServiceRunner(string baseUri)
         {
             _baseUri = baseUri;

@@ -13,8 +13,8 @@ namespace MyMortgage.RestApi.Specflow.Test.Context
 
         public void StartService()
         {
-            //_serviceRunner = new MsHttpServiceRunner(BaseUri);
-            _serviceRunner = new NancyServiceRunner(BaseUri);
+            _serviceRunner = new MsHttpServiceRunner(BaseUri);
+            //_serviceRunner = new NancyServiceRunner(BaseUri);
 
             _serviceRunner.Start();
         }

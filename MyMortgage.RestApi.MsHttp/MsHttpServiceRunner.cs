@@ -12,6 +12,11 @@ namespace MyMortgage.RestApi.MsHttp
         public WebServiceHost _host;
         public readonly string _baseUri;
 
+        public string Name
+        {
+            get { return "MsHttp"; }
+        }
+
         public MsHttpServiceRunner(string baseUri)
         {
             _baseUri = baseUri;
@@ -29,7 +34,7 @@ namespace MyMortgage.RestApi.MsHttp
 
                 _host.Open();
             }
-            catch (CommunicationException ce)
+            catch (CommunicationException)
             {
                 _host.Abort();
                 throw;
