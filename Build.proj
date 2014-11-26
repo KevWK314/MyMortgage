@@ -2,6 +2,7 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MSBuildCommunityTasksPath>$(MSBuildProjectDirectory)\.build</MSBuildCommunityTasksPath>
+    <NUnitHome>.\packages\NUnit.Runners.2.6.3\tools</NUnitHome>
   </PropertyGroup>
 
   <Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.targets"/>
@@ -62,12 +63,20 @@
     <CallTarget Targets="Compile" />
   </Target>
 
-  <Target Name="RunTests">
-      <PropertyGroup>
-		<NUnitHome>.\packages\NUnit.Runners.2.6.3\tools</NUnitHome>
-		<TestAssembly>MyMortgage.sln</TestAssembly>
-	  </PropertyGroup>
+  <Target Name="RunCalculatorTests">
+    <PropertyGroup>
+      <TestAssembly>MyMortgage.Calculator.Nunit.Test\bin\Debug\MyMortgage.Calculator.Nunit.Test.dll</TestAssembly>
+    </PropertyGroup>
     <NUnit ToolPath="$(NUnitHome)" Assemblies="$(TestAssembly)" />
   </Target>
-  
+
+  <Target Name="RunRestServiceTests">
+    <PropertyGroup>
+      <TestAssembly>MyMortgage.RestApi.Specflow.Test\bin\Debug\MyMortgage.RestApi.Specflow.Test.dll</TestAssembly>
+    </PropertyGroup>
+    <NUnit ToolPath="$(NUnitHome)" Assemblies="$(TestAssembly)" />
+  </Target>
+
+  <Target Name="RunAllTests" DependsOnTargets="Build;RunCalculatorTests;RunRestServiceTests" />
+
 </Project>

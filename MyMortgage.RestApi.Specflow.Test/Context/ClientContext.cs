@@ -4,13 +4,16 @@ using MyMortgage.RestApi.Common.Dto;
 
 namespace MyMortgage.RestApi.Specflow.Test.Context
 {
+    using MyMortgage.RestApi.Runner;
+
     public class ClientContext
     {
         private readonly MyMortgageClient _client;
 
         public ClientContext()
         {
-            _client = new MyMortgageClient(new RestClientService(ServiceContext.BaseUri));
+            var config = new ServiceRunnerConfig();
+            _client = new MyMortgageClient(new RestClientService(config.BaseUri));
         }
 
         public double GetMonthlyPayments(double principle, double rate, int durationInYears)

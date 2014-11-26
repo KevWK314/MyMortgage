@@ -92,6 +92,10 @@
       <Project>{d2029dda-cbc9-4cb0-bb7a-d2e69ba64f5c}</Project>
       <Name>MyMortgage.RestApi.Nancy</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyMortgage.RestApi.Runner\MyMortgage.RestApi.Runner.csproj">
+      <Project>{dd4c108b-76b1-48c0-8a17-3386778a5a33}</Project>
+      <Name>MyMortgage.RestApi.Runner</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

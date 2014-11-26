@@ -6,7 +6,7 @@ namespace MyMortgage.RestApi.Runner
     {
         static void Main(string[] args)
         {
-            var runnerFactory = new ServiceRunnerFactory();
+            var runnerFactory = new ServiceRunnerFactory(new ServiceRunnerConfig());
             var runner = runnerFactory.CreateServiceRunner();
             runner.Start();
 
