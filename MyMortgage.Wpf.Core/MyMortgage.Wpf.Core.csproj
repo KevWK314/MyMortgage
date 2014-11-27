@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C56833EE-1137-41B1-8C3D-A00DFD7C0FB6}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MyMortgage.Wpf.Core</RootNamespace>
+    <AssemblyName>MyMortgage.Wpf.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BootstrapModule.cs" />
+    <Compile Include="Common\Commands\DelegateCommand.cs" />
+    <Compile Include="Common\Controllers\CollectionController.cs" />
+    <Compile Include="Common\Controllers\Controller.cs" />
+    <Compile Include="Common\Controllers\IController.cs" />
+    <Compile Include="Common\Converter\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Common\Converter\InvertBooleanConverter.cs" />
+    <Compile Include="Common\ViewModel\IViewModelCommand.cs" />
+    <Compile Include="Common\ViewModel\IViewModelProperty.cs" />
+    <Compile Include="Common\ViewModel\IViewModelSnapshot.cs" />
+    <Compile Include="Common\ViewModel\ViewModelCommand.cs" />
+    <Compile Include="Common\ViewModel\ViewModelProperty.cs" />
+    <Compile Include="Common\ViewModel\ViewModelPropertyBuilder.cs" />
+    <Compile Include="Common\ViewModel\ViewModelPropertyCollection.cs" />
+    <Compile Include="Components\Factory\IViewModelFactory.cs" />
+    <Compile Include="Components\Main\MainController.cs" />
+    <Compile Include="Components\Main\MainViewModel.cs" />
+    <Compile Include="Components\Main\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Mortgage\MortgagesController.cs" />
+    <Compile Include="Components\Mortgage\MortgagesViewModel.cs" />
+    <Compile Include="Components\Mortgage\MortgageViewModel.cs" />
+    <Compile Include="Components\Factory\ViewModelFactory.cs" />
+    <Compile Include="Config\IMyMortgageConfig.cs" />
+    <Compile Include="Config\MyMortgageConfig.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyMortgage.RestApi.Client\MyMortgage.RestApi.Client.csproj">
+      <Project>{b662f7f3-4c97-4640-81da-eef7b7513e90}</Project>
+      <Name>MyMortgage.RestApi.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyMortgage.RestApi.Common\MyMortgage.RestApi.Common.csproj">
+      <Project>{95b18c40-b414-4601-8df6-a9cfc4c80618}</Project>
+      <Name>MyMortgage.RestApi.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Components\Main\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Components\Mortgage\ViewModel\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

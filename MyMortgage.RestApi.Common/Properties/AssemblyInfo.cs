@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("MyMortgage.RestApi.Common")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Digiterre Ltd.")]
+[assembly: AssemblyCompany("Kevin Kavanagh")]
 [assembly: AssemblyProduct("MyMortgage.RestApi.Common")]
-[assembly: AssemblyCopyright("Copyright © Digiterre Ltd. 2014")]
+[assembly: AssemblyCopyright("Copyright © Kevin Kavanagh 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

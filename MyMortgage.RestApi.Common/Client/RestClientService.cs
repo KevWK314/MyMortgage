@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Contracts;
 using System.Net;
 using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
@@ -14,6 +12,7 @@ namespace MyMortgage.RestApi.Common.Client
 
         public RestClientService(string baseUri)
         {
+            Ensure.That(Value.StringIsNotEmpty(baseUri), () => new ArgumentException("baseUri"));
             _baseUri = baseUri;
         }
 

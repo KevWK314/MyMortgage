@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MyMortgage.RestApi.Specflow.Test")]
+[assembly: AssemblyTitle("MyMortgage.Wpf.Core")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Kevin Kavanagh")]
-[assembly: AssemblyProduct("MyMortgage.RestApi.Specflow.Test")]
+[assembly: AssemblyProduct("MyMortgage.Wpf.Core")]
 [assembly: AssemblyCopyright("Copyright © Kevin Kavanagh 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("7de59128-5b81-4d72-8dc1-a9d7a06c0e7a")]
+[assembly: Guid("72daa673-46d5-4f69-818d-5a69d67576d3")]
 
 // Version information for an assembly consists of the following four values:
 //

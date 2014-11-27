@@ -37,6 +37,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1F1883
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wpf", "Wpf", "{198BA907-F986-4866-9FB2-D42383159EF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMortgage.Wpf.Core", "MyMortgage.Wpf.Core\MyMortgage.Wpf.Core.csproj", "{C56833EE-1137-41B1-8C3D-A00DFD7C0FB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMortgage.Wpf.Runner", "MyMortgage.Wpf.Runner\MyMortgage.Wpf.Runner.csproj", "{CD496F6C-A0BC-4117-B406-F610993F3DB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +89,14 @@ Global
 		{D2029DDA-CBC9-4CB0-BB7A-D2E69BA64F5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2029DDA-CBC9-4CB0-BB7A-D2E69BA64F5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2029DDA-CBC9-4CB0-BB7A-D2E69BA64F5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C56833EE-1137-41B1-8C3D-A00DFD7C0FB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C56833EE-1137-41B1-8C3D-A00DFD7C0FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C56833EE-1137-41B1-8C3D-A00DFD7C0FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C56833EE-1137-41B1-8C3D-A00DFD7C0FB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD496F6C-A0BC-4117-B406-F610993F3DB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD496F6C-A0BC-4117-B406-F610993F3DB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD496F6C-A0BC-4117-B406-F610993F3DB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD496F6C-A0BC-4117-B406-F610993F3DB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -96,5 +110,7 @@ Global
 		{DD4C108B-76B1-48C0-8A17-3386778A5A33} = {98822E52-8D22-4A16-9D02-D61A4783E5FA}
 		{B107F7EC-A515-45E1-8DE0-0BF77B5EC35B} = {98822E52-8D22-4A16-9D02-D61A4783E5FA}
 		{D2029DDA-CBC9-4CB0-BB7A-D2E69BA64F5C} = {98822E52-8D22-4A16-9D02-D61A4783E5FA}
+		{C56833EE-1137-41B1-8C3D-A00DFD7C0FB6} = {198BA907-F986-4866-9FB2-D42383159EF3}
+		{CD496F6C-A0BC-4117-B406-F610993F3DB6} = {198BA907-F986-4866-9FB2-D42383159EF3}
 	EndGlobalSection
 EndGlobal
