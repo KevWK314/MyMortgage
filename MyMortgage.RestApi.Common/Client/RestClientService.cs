@@ -1,14 +1,18 @@
 ﻿using System;
+using System.IO;
 using System.Net;
-using System.Runtime.Serialization.Json;
 using System.Threading.Tasks;
+
 using MyMortgage.Common.Validation;
+
+using Newtonsoft.Json;
 
 namespace MyMortgage.RestApi.Common.Client
 {
     public class RestClientService : IRestClientService
     {
         private readonly string _baseUri;
+        private readonly JsonSerializer _serializer = new JsonSerializer();
 
         public RestClientService(string baseUri)
         {
@@ -33,11 +37,13 @@ namespace MyMortgage.RestApi.Common.Client
             Ensure.That(Value.IsNotNull(restMethod), () => new ArgumentException("restMethod"));
             Ensure.That(Value.IsNotNull(request), () => new ArgumentException("request"));
 
-            var serializer = new DataContractJsonSerializer(typeof(TRequest));
             var webRequest = (HttpWebRequest)WebRequest.Create(GetActionUri(uri));
             webRequest.ContentType = "application/json";
-            webRequest.Method = restMethod.Method;
-            serializer.WriteObject(webRequest.GetRequestStream(), request);
+            webRequest.Method = restMethod.Method;          
+            using(var sw = new StreamWriter(webRequest.GetRequestStream()))
+            {
+                _serializer.Serialize(sw, request);
+            }
 
             return await webRequest.GetResponseAsync() as HttpWebResponse;
         }
@@ -46,9 +52,14 @@ namespace MyMortgage.RestApi.Common.Client
         {
             Ensure.That(Value.IsNotNull(response), () => new ArgumentException("response"));
 
-            var serializer = new DataContractJsonSerializer(typeof(TResult));
-            var res = serializer.ReadObject(response.GetResponseStream());
-            var result = (TResult)res;
+            var result = default(TResult);
+            using (var sr = new StreamReader(response.GetResponseStream()))
+            {
+                using (var textReader = new JsonTextReader(sr))
+                {
+                    result = _serializer.Deserialize<TResult>(textReader);
+                }
+            }
 
             return result;
         }

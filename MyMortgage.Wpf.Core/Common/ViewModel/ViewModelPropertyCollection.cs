@@ -22,7 +22,7 @@ namespace MyMortgage.Wpf.Core.Common.ViewModel
             get { return this._properties.All(p => p.IsValid); }
         }
 
-        public ViewModelPropertyBuilder<T> New<T>(string name, Func<T> getDefaultValue)
+        public ViewModelPropertyBuilder<T> NewProperty<T>(string name, Func<T> getDefaultValue)
         {
             var builder = new ViewModelPropertyBuilder<T>(name, getDefaultValue);
             this._properties.Add(builder.Property);

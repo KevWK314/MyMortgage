@@ -22,21 +22,21 @@ namespace MyMortgage.RestApi.Client
             return response != null && response.StatusCode == HttpStatusCode.OK;
         }
 
-        public async Task<double> GetMonthlyPaymentAsync(MonthlyPaymentsRequest req)
+        public async Task<MonthlyPaymentsResponse> GetMonthlyPaymentAsync(MonthlyPaymentsRequest req)
         {
             Ensure.That(Value.IsNotNull(req), () => new ArgumentNullException("req"));
 
             var response = await _restClientService.SendJsonRequest("monthlyPayment", RestMethod.Post, req);
-            var result = _restClientService.GetResponseResult<double>(response);
+            var result = _restClientService.GetResponseResult<MonthlyPaymentsResponse>(response);
             return result;
         }
 
-        public async Task<double> GetPrincipleRemainingAsync(PrincipleRemainingRequest req)
+        public async Task<PrincipleRemainingResponse> GetPrincipleRemainingAsync(PrincipleRemainingRequest req)
         {
             Ensure.That(Value.IsNotNull(req), () => new ArgumentNullException("req"));
 
             var response = await _restClientService.SendJsonRequest("principleRemaining", RestMethod.Post, req);
-            var result = _restClientService.GetResponseResult<double>(response);
+            var result = _restClientService.GetResponseResult<PrincipleRemainingResponse>(response);
             return result;
         }
     }

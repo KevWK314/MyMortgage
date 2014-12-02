@@ -6,7 +6,7 @@ namespace MyMortgage.RestApi.Client
     public interface IMyMortgageClient
     {
         Task<bool> IsServiceOkAsync();
-        Task<double> GetMonthlyPaymentAsync(MonthlyPaymentsRequest req);
-        Task<double> GetPrincipleRemainingAsync(PrincipleRemainingRequest req);
+        Task<MonthlyPaymentsResponse> GetMonthlyPaymentAsync(MonthlyPaymentsRequest req);
+        Task<PrincipleRemainingResponse> GetPrincipleRemainingAsync(PrincipleRemainingRequest req);
     }
 }

@@ -153,6 +153,8 @@ namespace MyMortgage.Wpf.Core.Common.ViewModel
         internal void SetValidation(Predicate<T> validation)
         {
             this._validation = validation ?? (t => true);
+            this._isValid = this._validation(this.Value);
+            this.RaisePropertyChanged(Fields.IsValid);
         }
 
         private void RaisePropertyChanged(string property)

@@ -13,10 +13,10 @@ namespace MyMortgage.RestApi.MsHttp.Service
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/monthlyPayment", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        double GetMonthlyPayment(MonthlyPaymentsRequest request);
+        MonthlyPaymentsResponse GetMonthlyPayment(MonthlyPaymentsRequest request);
 
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "/principleRemaining", RequestFormat = WebMessageFormat.Json, ResponseFormat = WebMessageFormat.Json)]
-        double GetPrincipleRemaining(PrincipleRemainingRequest request);
+        PrincipleRemainingResponse GetPrincipleRemaining(PrincipleRemainingRequest request);
     }
 }

@@ -51,6 +51,12 @@ namespace MyMortgage.Wpf.Core.Common.ViewModel
             return this;
         }
 
+        public ViewModelPropertyBuilder<T> WhenUpdated(Action whenUpdated)
+        {
+            this._property.ValueUpdated += (s, a) => whenUpdated();
+            return this;
+        }
+
         public ViewModelProperty<T> Build()
         {
             return this._property;

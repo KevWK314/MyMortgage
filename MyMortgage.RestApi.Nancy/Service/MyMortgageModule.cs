@@ -1,19 +1,22 @@
-﻿using System.Runtime.Serialization.Json;
-using MyMortgage.Calculator;
-using MyMortgage.RestApi.Common.Dto;
+﻿using MyMortgage.RestApi.Common.Dto;
+using MyMortgage.RestApi.Common.Server;
+
 using Nancy;
+using Nancy.ModelBinding;
 
 namespace MyMortgage.RestApi.Nancy.Service
 {
     public class MyMortgageModule : NancyModule
     {
+        private MyMortgageCalcService _calc = new MyMortgageCalcService();
+
         public MyMortgageModule()
         {
             Get["/status"] = p => GetStatus();
 
-            Post["/monthlyPayment"] = p => Response.AsJson(GetMonthlyPayment(GetRequest<MonthlyPaymentsRequest>()));
+            Post["/monthlyPayment"] = p => Response.AsJson(GetMonthlyPayment(this.Bind<MonthlyPaymentsRequest>()));
 
-            Post["/principleRemaining"] = p => Response.AsJson(GetPrincipleRemaining(GetRequest<PrincipleRemainingRequest>()));
+            Post["/principleRemaining"] = p => Response.AsJson(GetPrincipleRemaining(this.Bind<PrincipleRemainingRequest>()));
         }
 
         public string GetStatus()
@@ -21,36 +24,14 @@ namespace MyMortgage.RestApi.Nancy.Service
             return "Nancy says hi";
         }
 
-        private double GetMonthlyPayment(MonthlyPaymentsRequest request)
+        private MonthlyPaymentsResponse GetMonthlyPayment(MonthlyPaymentsRequest request)
         {
-            var result = Mortgage.WhatDoIPayPerMonth()
-                .WithPrinciple(request.Principle)
-                .WithRate(request.Rate)
-                .WithDurationInMonths(request.DurationInMonths)
-                .Calculate();
-
-            return result.MonthlyPayment;
+            return _calc.GetMonthlyPayment(request);
         }
 
-        private double GetPrincipleRemaining(PrincipleRemainingRequest request)
+        private PrincipleRemainingResponse GetPrincipleRemaining(PrincipleRemainingRequest request)
         {
-            var result = Mortgage.HowMuchIsLeftToPay()
-                .WithPrinciple(request.Principle)
-                .WithRate(request.Rate)
-                .WithDurationInMonths(request.DurationInMonths)
-                .WithMonthsAlreadyPaid(request.MonthsAlreadyPaid)
-                .WithMonthlyPaymentsOf(request.MonthlyPayment)
-                .Calculate();
-
-            return result.PrincipleRemaining;
-        }
-
-        private T GetRequest<T>()
-        {
-            var serializer = new DataContractJsonSerializer(typeof(T));
-            var res = (T)serializer.ReadObject(Request.Body);
-
-            return res;
+            return _calc.GetPrincipleRemaining(request);
         }
     }
 }

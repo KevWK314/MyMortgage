@@ -24,7 +24,7 @@ namespace MyMortgage.RestApi.Specflow.Test.Context
                 Rate = rate,
                 DurationInMonths = durationInYears * 12
             };
-            return _client.GetMonthlyPaymentAsync(req).Result;
+            return _client.GetMonthlyPaymentAsync(req).Result.MonthlyPayment;
         }
 
         public double GetPrincipleRemaining(double principle, double rate, int durationInYears, int yearsAlreadyPaid, double monthlyPayment)
@@ -37,7 +37,7 @@ namespace MyMortgage.RestApi.Specflow.Test.Context
                 MonthsAlreadyPaid = yearsAlreadyPaid * 12,
                 MonthlyPayment = monthlyPayment
             };
-            return _client.GetPrincipleRemainingAsync(req).Result;
+            return _client.GetPrincipleRemainingAsync(req).Result.PrincipleRemaining;
         }
     }
 }

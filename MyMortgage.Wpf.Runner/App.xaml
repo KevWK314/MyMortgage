@@ -4,6 +4,11 @@
              xmlns:runner="clr-namespace:MyMortgage.Wpf.Runner"
              StartupUri="Shell.xaml">
     <Application.Resources>
-        <runner:ViewBootstrap x:Key="ViewBootstrap" />
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/MyMortgage.Wpf.Core;component/Themes/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <runner:ViewBootstrap x:Key="ViewBootstrap" />
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

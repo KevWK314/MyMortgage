@@ -11,16 +11,20 @@ namespace MyMortgage.Wpf.Runner
 
         private readonly MainController _mainController;
 
+        private readonly MainView _mainView;
+
         public ViewBootstrap()
         {
             _kernel = new StandardKernel(new BootstrapModule());
             _mainController = _kernel.Get<MainController>();
             _mainController.Create();
+
+            _mainView = new MainView { DataContext = this._mainController.ViewModel };
         }
 
-        public MainViewModel MainViewModel
+        public MainView MainView
         {
-            get { return _mainController.ViewModel; }
+            get { return _mainView; }
         }
     }
 }

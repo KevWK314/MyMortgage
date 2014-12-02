@@ -69,13 +69,22 @@
     <Compile Include="Components\Main\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\Mortgage\MortgageModel.cs" />
     <Compile Include="Components\Mortgage\MortgagesController.cs" />
+    <Compile Include="Components\Mortgage\MortgagesView.xaml.cs">
+      <DependentUpon>MortgagesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\Mortgage\MortgagesViewModel.cs" />
+    <Compile Include="Components\Mortgage\MortgageView.xaml.cs">
+      <DependentUpon>MortgageView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\Mortgage\MortgageViewModel.cs" />
     <Compile Include="Components\Factory\ViewModelFactory.cs" />
     <Compile Include="Config\IMyMortgageConfig.cs" />
     <Compile Include="Config\MyMortgageConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Themes\LeftMarginMultiplierConverter.cs" />
+    <Compile Include="Themes\TreeViewItemExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -95,10 +104,20 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Components\Mortgage\MortgagesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\Mortgage\MortgageView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Components\Mortgage\ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
