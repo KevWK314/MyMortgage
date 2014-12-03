@@ -2,17 +2,33 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:converter="clr-namespace:MyMortgage.Wpf.Core.Common.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
     <UserControl.Resources>
-        <SolidColorBrush x:Key="HighlighBrush" Color="{StaticResource HighlightColor}" />
+        <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+        <converter:InvertBooleanConverter x:Key="InvertBooleanConverter" />
+
+        <Style TargetType="Border" x:Key="MainBorder">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="{StaticResource BorderNotActiveBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="{StaticResource BorderActiveBrush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
     </UserControl.Resources>
 
-    <Border Padding="10" Margin="0,0,5,5" BorderBrush="{StaticResource HighlighBrush}" BorderThickness="1">
+    <Border Style="{StaticResource MainBorder}" Padding="10" Margin="0,0,5,5">
         <Grid Width="200">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
@@ -30,15 +46,18 @@
             <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Rate.Description}" Margin="0,0,5,5" VerticalAlignment="Center" />
             <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Rate.Value}" Margin="0,0,0,5" TextAlignment="Right"/>
 
-            <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Duration.Description}" Margin="0,0,5,5" VerticalAlignment="Center" />
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Duration.Description}" Margin="0,0,5,10" VerticalAlignment="Center" />
             <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Duration.Value}" Margin="0,0,0,5" TextAlignment="Right"/>
 
-            <TextBlock Grid.Row="3" Grid.Column="0" Text="{Binding MonthlyPayment.Description}" Margin="0,0,5,5" VerticalAlignment="Center" />
-            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding MonthlyPayment.Value}" Margin="0,0,0,5" TextAlignment="Right"/>
+            <Button Opacity="1" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Command="{Binding UpdateCommand}" Padding="20,5" Margin="0,0,0,10" >Update</Button>
 
-            <TextBlock Grid.Row="4" Grid.Column="0" Text="{Binding TotalPayment.Description}" Margin="0,0,5,5" VerticalAlignment="Center" />
-            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding TotalPayment.Value}" Margin="0,0,0,5" TextAlignment="Right"/>
+            <TextBlock Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Error.Value}" Margin="0,0,0,10" Visibility="{Binding Error.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}" Foreground="Red" TextAlignment="Center" TextWrapping="Wrap" />
 
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="{Binding MonthlyPayment.Description}" Margin="0,0,5,5" VerticalAlignment="Center" />
+            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding MonthlyPayment.FormattedValue}" IsReadOnly="{Binding MonthlyPayment.IsEditable, Converter={StaticResource InvertBooleanConverter}}" Margin="0,0,0,5" TextAlignment="Right"/>
+
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="{Binding TotalPayment.Description}" Margin="0,0,5,5" VerticalAlignment="Center" />
+            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding TotalPayment.FormattedValue}" IsReadOnly="{Binding TotalPayment.IsEditable, Converter={StaticResource InvertBooleanConverter}}" Margin="0,0,0,5" TextAlignment="Right"/>
 
         </Grid>
     </Border>

@@ -11,6 +11,8 @@ using Ninject.Modules;
 
 namespace MyMortgage.Wpf.Core
 {
+    using MyMortgage.Wpf.Core.Common.Context;
+
     public class BootstrapModule : NinjectModule
     {
         public override void Load()
@@ -21,6 +23,7 @@ namespace MyMortgage.Wpf.Core
 
             // ViewModel
             Bind<IViewModelFactory>().To<ViewModelFactory>();
+            Bind<IUiContext>().To<UiContext>();
 
             // Service            
             Bind<IMyMortgageConfig>().To<MyMortgageConfig>();

@@ -19,7 +19,10 @@
     <Color x:Key="HotColor">#525252</Color>
     
     <!--Brushes-->
-    <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}"/>
+    <SolidColorBrush x:Key="BorderActiveBrush" Color="{StaticResource HighlightColor}"/>
+    <SolidColorBrush x:Key="BorderNotActiveBrush" Color="{StaticResource LightDisabledBackgroundColor}"/>
+
+    <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource ForegroundColor}"/>  
     <SolidColorBrush x:Key="MouseOverForegroundBrush" Color="{StaticResource DarkBackgroundColor}"/>
     <SolidColorBrush x:Key="WindowBackgroundBrush" Color="{StaticResource WindowBackgroundColor}"/>
 

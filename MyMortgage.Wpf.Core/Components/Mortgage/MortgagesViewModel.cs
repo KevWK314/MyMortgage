@@ -1,20 +1,24 @@
 ﻿using System.Collections.ObjectModel;
 
+using MyMortgage.Wpf.Core.Common.Context;
 using MyMortgage.Wpf.Core.Common.Commands;
 using MyMortgage.Wpf.Core.Common.ViewModel;
 
 namespace MyMortgage.Wpf.Core.Components.Mortgage
 {
-    using System.Windows.Input;
-
-    public class MortgagesViewModel
+    public class MortgagesViewModel : ViewModelBase
     {
         private readonly MortgagesController _controller;
-        private readonly ViewModelPropertyCollection _properties = new ViewModelPropertyCollection();
 
         public ObservableCollection<MortgageViewModel> Mortgages
         {
             get { return _controller.Children; }
+        }
+
+        public MortgagesViewModel(MortgagesController controller, IUiContext uiContext)
+            : base(uiContext)
+        {
+            _controller = controller;
         }
 
         public ViewModelCommand<DelegateCommand> AddCommand
@@ -23,22 +27,10 @@ namespace MyMortgage.Wpf.Core.Components.Mortgage
             private set;
         }
 
-        public MortgagesViewModel(MortgagesController controller)
-        {
-            _controller = controller;
-
-            CreateCommands();
-            CreateProperties();
-        }
-
-        private void CreateCommands()
+        protected override void CreateCommands()
         {
             var addCommand = new DelegateCommand(() => _controller.AddNewMortgage());
-            AddCommand = _properties.NewCommand("Add Mortgage", addCommand);
-        }
-
-        private void CreateProperties()
-        {
+            AddCommand = Properties.NewCommand("Add Mortgage", addCommand);
         }
     }
 }

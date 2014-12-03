@@ -1,6 +1,6 @@
-﻿namespace MyMortgage.Wpf.Core.Components.Mortgage.Model
+﻿namespace MyMortgage.Wpf.Core.Components.Mortgage
 {
-    public class MortgageDetails
+    public class MortgageModel
     {
         public double? Principle
         {

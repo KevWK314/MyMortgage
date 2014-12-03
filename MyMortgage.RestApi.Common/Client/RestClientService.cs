@@ -39,8 +39,9 @@ namespace MyMortgage.RestApi.Common.Client
 
             var webRequest = (HttpWebRequest)WebRequest.Create(GetActionUri(uri));
             webRequest.ContentType = "application/json";
-            webRequest.Method = restMethod.Method;          
-            using(var sw = new StreamWriter(webRequest.GetRequestStream()))
+            webRequest.Method = restMethod.Method;
+            var stream = await webRequest.GetRequestStreamAsync();
+            using(var sw = new StreamWriter(stream))
             {
                 _serializer.Serialize(sw, request);
             }

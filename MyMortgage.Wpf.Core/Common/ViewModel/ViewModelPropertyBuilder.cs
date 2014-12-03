@@ -45,9 +45,9 @@ namespace MyMortgage.Wpf.Core.Common.ViewModel
             return this;
         }
 
-        public ViewModelPropertyBuilder<T> WithVisibility(bool isVisible)
+        public ViewModelPropertyBuilder<T> WithVisibility(Func<bool> isVisible)
         {
-            this._property.IsVisible = isVisible;
+            this._property.SetVisibility(isVisible);
             return this;
         }
 

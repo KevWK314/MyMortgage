@@ -1,11 +1,14 @@
-﻿using MyMortgage.RestApi.Client;
+﻿using System;
+using System.Threading.Tasks;
+
+using MyMortgage.Common.Validation;
+using MyMortgage.RestApi.Client;
+using MyMortgage.RestApi.Common.Dto;
 using MyMortgage.Wpf.Core.Common.Controllers;
 using MyMortgage.Wpf.Core.Components.Factory;
 
 namespace MyMortgage.Wpf.Core.Components.Mortgage
 {
-    using System;
-
     public class MortgagesController : CollectionController<MortgagesViewModel, MortgageViewModel>
     {
         private readonly IMyMortgageClient _client;
@@ -34,9 +37,36 @@ namespace MyMortgage.Wpf.Core.Components.Mortgage
 
         public void UpdateResults(MortgageViewModel mortgage)
         {
-            // Get Result
+            Ensure.That(Value.IsNotNull(mortgage), () => new ArgumentNullException("mortgage"));
 
-            mortgage.SetResult(1, 25);
+            mortgage.IsWaiting.Value = true;
+            mortgage.Error.Value = string.Empty;
+
+            var request = new MonthlyPaymentsRequest
+            {
+                Principle = mortgage.Principle.Value ?? 0,
+                Rate = mortgage.Rate.Value ?? 0,
+                DurationInMonths = (mortgage.Duration.Value ?? 0) * 12
+            };
+
+            _client.GetMonthlyPaymentAsync(request)
+                .ContinueWith(result => ProcessUpdateResults(mortgage, result));
+        }
+
+        private void ProcessUpdateResults(MortgageViewModel mortgage, Task<MonthlyPaymentsResponse> result)
+        {
+            try
+            {
+                mortgage.SetResult(result.Result.MonthlyPayment, result.Result.TotalPayments);
+            }
+            catch
+            {
+                mortgage.Error.Value = "Uh oh, server communication error";
+            }
+            finally
+            {
+                mortgage.IsWaiting.Value = false;
+            }
         }
     }
 }

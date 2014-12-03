@@ -1,20 +1,18 @@
-﻿using MyMortgage.Wpf.Core.Common.ViewModel;
-using MyMortgage.Wpf.Core.Components.Mortgage.Model;
+﻿using MyMortgage.Wpf.Core.Common.Context;
+using MyMortgage.Wpf.Core.Common.Commands;
+using MyMortgage.Wpf.Core.Common.ViewModel;
 
 namespace MyMortgage.Wpf.Core.Components.Mortgage
 {
-    public class MortgageViewModel
+    public class MortgageViewModel : ViewModelBase
     {
+        private MortgageModel _model = new MortgageModel();
         private readonly MortgagesController _controller;
-        private readonly ViewModelPropertyCollection _properties = new ViewModelPropertyCollection();
 
-        private double? _monthlyPayment;
-        private double? _totalPayment;
-
-        public MortgageViewModel(MortgagesController controller)
+        public MortgageViewModel(MortgagesController controller, IUiContext uiContext)
+            : base(uiContext)
         {
             _controller = controller;
-            CreateProperties();
         }
 
         public ViewModelProperty<double?> Principle
@@ -47,55 +45,89 @@ namespace MyMortgage.Wpf.Core.Components.Mortgage
             private set;
         }
 
+        public ViewModelProperty<bool> IsWaiting
+        {
+            get;
+            private set;
+        }
+
+        public ViewModelProperty<string> Error
+        {
+            get;
+            private set;
+        }
+
+        public ViewModelCommand<DelegateCommand> UpdateCommand
+        {
+            get;
+            private set;
+        }
+
         public void SetResult(double monthlyPayment, double totalPayment)
         {
-            _monthlyPayment = monthlyPayment;
-            _totalPayment = totalPayment;
+            _model.MonthlyPayment = monthlyPayment;
+            _model.TotalPayment = totalPayment;
             MonthlyPayment.RefreshValue();
             TotalPayment.RefreshValue();
         }
 
-        public void ClearResult()
+        protected override void CreateProperties()
         {
-            MonthlyPayment.ResetValue();
-            TotalPayment.ResetValue();
-        }
-
-        private void CreateProperties()
-        {
-            Principle = _properties
-                .NewProperty<double?>("Principle", () => null)
+            Principle = Properties
+                .NewProperty<double?>("Principle", () => _model.Principle)
                 .WithDescription("Principle")
                 .WithValidation(v => (v ?? 0) > 0)
-                .WhenUpdated(TryUpdateResult)
+                .WhenUpdated(RefreshUpdate)
                 .Build();
-            Rate = _properties
-                .NewProperty<double?>("Rate", () => null)
+            Rate = Properties
+                .NewProperty<double?>("Rate", () => _model.Rate)
                 .WithDescription("Rate")
                 .WithValidation(v => (v ?? 0) > 0)
-                .WhenUpdated(TryUpdateResult)
+                .WhenUpdated(RefreshUpdate)
                 .Build();
-            Duration = _properties
-                .NewProperty<int?>("Duration", () => 25)
+            Duration = Properties
+                .NewProperty<int?>("Duration", () => _model.DurationInYears)
                 .WithDescription("Duration")
                 .WithValidation(v => (v ?? 0) > 0)
-                .WhenUpdated(TryUpdateResult)
+                .WhenUpdated(RefreshUpdate)
                 .Build();
-            MonthlyPayment = _properties
-                .NewProperty<double?>("MonthlyPayment", () => _monthlyPayment)
+            MonthlyPayment = Properties
+                .NewProperty<double?>("MonthlyPayment", () => _model.MonthlyPayment)
                 .WithDescription("Monthly Payment")
+                .WithFormat("#,##0.00")
                 .WithEditability(false)
                 .Build();
-            TotalPayment = _properties
-                .NewProperty<double?>("TotalPayment", () => _totalPayment)
+            TotalPayment = Properties
+                .NewProperty<double?>("TotalPayment", () => _model.TotalPayment)
                 .WithDescription("Total Payment")
+                .WithFormat("#,##0.00")
                 .WithEditability(false)
                 .Build();
+            IsWaiting = Properties
+                .NewProperty<bool>("IsWaiting", () => false)
+                .WithDescription("Waiting")
+                .WhenUpdated(RefreshUpdate)
+                .Build();
+            Error = Properties
+                .NewProperty<string>("Error", () => string.Empty)
+                .WithVisibility(() => !string.IsNullOrEmpty(Error.Value))
+                .WithDescription("Error")
+                .Build();
+        }
+
+        protected override void CreateCommands()
+        {
+            UpdateCommand = Properties.NewCommand("Update", new DelegateCommand(TryUpdateResult, () => Properties.IsValid && !IsWaiting.Value));
+        }
+
+        private void RefreshUpdate()
+        {
+            UiContext.BeginInvoke(() => UpdateCommand.Command.UpdateCanExecute());
         }
 
         private void TryUpdateResult()
         {
-            if (_properties.IsValid)
+            if (Properties.IsValid)
             {
                 _controller.UpdateResults(this);
             }

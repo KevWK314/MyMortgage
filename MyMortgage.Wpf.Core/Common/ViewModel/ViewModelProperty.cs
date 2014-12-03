@@ -10,12 +10,12 @@ namespace MyMortgage.Wpf.Core.Common.ViewModel
         private bool _isUpdated;
         private bool _isValid = true;
         private bool _isEditable = true;
-        private bool _isVisible = true;
         private string _format;
         private string _description;
 
         private readonly Func<T> _getDefault;
         private Predicate<T> _validation;
+        private Func<bool> _isVisible;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler ValueUpdated;
@@ -38,167 +38,175 @@ namespace MyMortgage.Wpf.Core.Common.ViewModel
         {
             get
             {
-                return this._isUpdated ? this._value : this._getDefault();
+                return _isUpdated ? _value : _getDefault();
             }
             set
             {
-                if (this.IsEditable)
+                if (IsEditable)
                 {
-                    this._value = value;
-                    this._isUpdated = true;
-                    this._isValid = this._validation(value);
-                    this.RaisePropertyChanged(Fields.Value);
-                    this.RaisePropertyChanged(Fields.FormattedValue);
-                    this.RaisePropertyChanged(Fields.IsUpdated);
-                    this.RaisePropertyChanged(Fields.IsValid);
-                    this.OnValueUpdated();
+                    _value = value;
+                    _isUpdated = true;
+                    _isValid = _validation(value);
+                    RaisePropertyChanged(Fields.Value);
+                    RaisePropertyChanged(Fields.FormattedValue);
+                    RaisePropertyChanged(Fields.IsUpdated);
+                    RaisePropertyChanged(Fields.IsValid);
+                    RaisePropertyChanged(Fields.IsVisible);
+                    OnValueUpdated();
                 }
             }
         }
 
         public string FormattedValue
         {
-            get { return string.Format("{0:" + this._format + "}", this.Value); }
+            get { return string.Format("{0:" + _format + "}", Value); }
             set { }
         }
 
         public string Description
         {
-            get { return this._description; }
+            get { return _description; }
             set
             {
-                this._description = value;
-                this.RaisePropertyChanged(Fields.Description);
+                _description = value;
+                RaisePropertyChanged(Fields.Description);
             }
         }
 
         public bool IsEditable
         {
-            get { return this._isEditable; }
+            get { return _isEditable; }
             set
             {
-                this._isEditable = value;
-                this.RaisePropertyChanged(Fields.IsEditable);
+                _isEditable = value;
+                RaisePropertyChanged(Fields.IsEditable);
             }
         }
 
         public bool IsVisible
         {
-            get { return this._isVisible; }
+            get { return _isVisible == null || _isVisible(); }
             set
             {
-                this._isVisible = value;
-                this.RaisePropertyChanged(Fields.IsVisible);
+                _isVisible = () => value;
+                RaisePropertyChanged(Fields.IsVisible);
             }
         }
 
         public bool IsUpdated
         {
-            get { return this._isUpdated; }
+            get { return _isUpdated; }
         }
 
         public bool IsValid
         {
-            get { return this._isValid; }
+            get { return _isValid; }
         }
 
         public string Format
         {
-            get { return this._format; }
+            get { return _format; }
             set
             {
-                this._format = value;
-                this.RaisePropertyChanged(Fields.Format);
-                this.RaisePropertyChanged(Fields.FormattedValue);
+                _format = value;
+                RaisePropertyChanged(Fields.Format);
+                RaisePropertyChanged(Fields.FormattedValue);
             }
         }
 
         internal ViewModelProperty(string name, Func<T> getDefault)
         {
-            this.Name = name;
-            this._getDefault = getDefault ?? (() => default(T));
-            this.SetValidation(null);
+            Name = name;
+            _getDefault = getDefault ?? (() => default(T));
+            SetValidation(null);
         }
 
         public void RefreshValue()
         {
-            this.RaisePropertyChanged(Fields.Value);
-            this.RaisePropertyChanged(Fields.FormattedValue);
-            this.RaisePropertyChanged(Fields.IsValid);
+            RaisePropertyChanged(Fields.Value);
+            RaisePropertyChanged(Fields.FormattedValue);
+            RaisePropertyChanged(Fields.IsValid);
+            RaisePropertyChanged(Fields.IsVisible);
         }
 
         public void RefreshAll()
         {
-            this.RaisePropertyChanged(Fields.Value);
-            this.RaisePropertyChanged(Fields.FormattedValue);
-            this.RaisePropertyChanged(Fields.IsUpdated);
-            this.RaisePropertyChanged(Fields.IsValid);
-            this.RaisePropertyChanged(Fields.IsEditable);
-            this.RaisePropertyChanged(Fields.IsVisible);
-            this.RaisePropertyChanged(Fields.Format);
-            this.RaisePropertyChanged(Fields.Description);
+            RaisePropertyChanged(Fields.Value);
+            RaisePropertyChanged(Fields.FormattedValue);
+            RaisePropertyChanged(Fields.IsUpdated);
+            RaisePropertyChanged(Fields.IsValid);
+            RaisePropertyChanged(Fields.IsEditable);
+            RaisePropertyChanged(Fields.IsVisible);
+            RaisePropertyChanged(Fields.Format);
+            RaisePropertyChanged(Fields.Description);
         }
 
         public void ResetValue()
         {
-            this._isUpdated = false;
-            this._isValid = this._validation(this.Value);
-            this.RaisePropertyChanged(Fields.Value);
-            this.RaisePropertyChanged(Fields.FormattedValue);
-            this.RaisePropertyChanged(Fields.IsValid);
-            this.RaisePropertyChanged(Fields.IsUpdated);
-            this.OnValueUpdated();
+            _isUpdated = false;
+            _isValid = _validation(Value);
+            RaisePropertyChanged(Fields.Value);
+            RaisePropertyChanged(Fields.FormattedValue);
+            RaisePropertyChanged(Fields.IsValid);
+            RaisePropertyChanged(Fields.IsUpdated);
+            OnValueUpdated();
         }
 
         internal void SetValidation(Predicate<T> validation)
         {
-            this._validation = validation ?? (t => true);
-            this._isValid = this._validation(this.Value);
-            this.RaisePropertyChanged(Fields.IsValid);
+            _validation = validation ?? (t => true);
+            _isValid = _validation(Value);
+            RaisePropertyChanged(Fields.IsValid);
+        }
+
+        public void SetVisibility(Func<bool> isVisible)
+        {
+            _isVisible = isVisible;
+            RaisePropertyChanged(Fields.IsVisible);
         }
 
         private void RaisePropertyChanged(string property)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(property));
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
             }
         }
 
         private void OnValueUpdated()
         {
-            if (this.ValueUpdated != null)
+            if (ValueUpdated != null)
             {
-                this.ValueUpdated(this, EventArgs.Empty);
+                ValueUpdated(this, EventArgs.Empty);
             }
         }
 
         public override string ToString()
         {
-            return this.FormattedValue;
+            return FormattedValue;
         }
 
         public string GetSnapshot(bool full)
         {
-            var result = this.FormattedValue ?? string.Empty;
+            var result = FormattedValue ?? string.Empty;
             var details = new List<string>();
             if (full)
             {
-                if (this.IsUpdated)
+                if (IsUpdated)
                 {
-                    details.Add(string.Format("IsUpdated={0}", this.IsUpdated));
+                    details.Add(string.Format("IsUpdated={0}", IsUpdated));
                 }
-                if (!this.IsEditable)
+                if (!IsEditable)
                 {
-                    details.Add(string.Format("IsEditable={0}", this.IsEditable));
+                    details.Add(string.Format("IsEditable={0}", IsEditable));
                 }
-                if (!this.IsVisible)
+                if (!IsVisible)
                 {
-                    details.Add(string.Format("IsVisible={0}", this.IsVisible));
+                    details.Add(string.Format("IsVisible={0}", IsVisible));
                 }
-                if (!this.IsValid)
+                if (!IsValid)
                 {
-                    details.Add(string.Format("IsValid={0}", this.IsValid));
+                    details.Add(string.Format("IsValid={0}", IsValid));
                 }
             }
 

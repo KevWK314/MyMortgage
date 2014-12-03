@@ -1,6 +1,8 @@
-﻿namespace MyMortgage.Wpf.Core.Common.Controllers
+﻿using MyMortgage.Wpf.Core.Common.ViewModel;
+
+namespace MyMortgage.Wpf.Core.Common.Controllers
 {
-    public abstract class Controller<T> : IController
+    public abstract class Controller<T> : IController where T : ViewModelBase
     {
         private bool _created;
         private readonly object _syncRoot = new object();
