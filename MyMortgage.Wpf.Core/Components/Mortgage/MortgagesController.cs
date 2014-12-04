@@ -35,12 +35,9 @@ namespace MyMortgage.Wpf.Core.Components.Mortgage
             Children.Add(newViewModel);
         }
 
-        public void UpdateResults(MortgageViewModel mortgage)
+        public async Task<MonthlyPaymentsResponse> UpdateResults(MortgageViewModel mortgage)
         {
             Ensure.That(Value.IsNotNull(mortgage), () => new ArgumentNullException("mortgage"));
-
-            mortgage.IsWaiting.Value = true;
-            mortgage.Error.Value = string.Empty;
 
             var request = new MonthlyPaymentsRequest
             {
@@ -49,24 +46,7 @@ namespace MyMortgage.Wpf.Core.Components.Mortgage
                 DurationInMonths = (mortgage.Duration.Value ?? 0) * 12
             };
 
-            _client.GetMonthlyPaymentAsync(request)
-                .ContinueWith(result => ProcessUpdateResults(mortgage, result));
-        }
-
-        private void ProcessUpdateResults(MortgageViewModel mortgage, Task<MonthlyPaymentsResponse> result)
-        {
-            try
-            {
-                mortgage.SetResult(result.Result.MonthlyPayment, result.Result.TotalPayments);
-            }
-            catch
-            {
-                mortgage.Error.Value = "Uh oh, server communication error";
-            }
-            finally
-            {
-                mortgage.IsWaiting.Value = false;
-            }
+            return await _client.GetMonthlyPaymentAsync(request);
         }
     }
 }

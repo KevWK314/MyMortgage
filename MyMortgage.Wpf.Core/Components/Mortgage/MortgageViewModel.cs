@@ -1,4 +1,5 @@
-﻿using MyMortgage.Wpf.Core.Common.Context;
+﻿using MyMortgage.Common.Task;
+using MyMortgage.Wpf.Core.Common.Context;
 using MyMortgage.Wpf.Core.Common.Commands;
 using MyMortgage.Wpf.Core.Common.ViewModel;
 
@@ -129,7 +130,14 @@ namespace MyMortgage.Wpf.Core.Components.Mortgage
         {
             if (Properties.IsValid)
             {
-                _controller.UpdateResults(this);
+                IsWaiting.Value = true;
+                Error.Value = string.Empty;
+
+                _controller.UpdateResults(this)
+                    .ContinueWith(
+                    r => SetResult(r.MonthlyPayment, r.TotalPayments),
+                    e => Error.Value = "Uh oh, server communication error",
+                    () => IsWaiting.Value = false);
             }
         }
     }

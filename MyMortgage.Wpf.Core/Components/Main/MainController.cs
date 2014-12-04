@@ -7,6 +7,8 @@ using MyMortgage.Wpf.Core.Components.Mortgage;
 
 namespace MyMortgage.Wpf.Core.Components.Main
 {
+    using System.Threading.Tasks;
+
     public class MainController : Controller<MainViewModel>
     {
         private readonly IMyMortgageClient _client;
@@ -35,6 +37,11 @@ namespace MyMortgage.Wpf.Core.Components.Main
 
         protected override void Initialise()
         {
+        }
+
+        public async Task<bool> IsServerAvailable()
+        {
+            return await _client.IsServiceOkAsync();
         }
     }
 }

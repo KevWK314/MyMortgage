@@ -4,11 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mortgage="clr-namespace:MyMortgage.Wpf.Core.Components.Mortgage"
+             xmlns:converter="clr-namespace:MyMortgage.Wpf.Core.Common.Converter"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
 
-    <Grid Margin="10">
-        <mortgage:MortgagesView DataContext="{Binding MortgagesViewModel}"/>      
+    <UserControl.Resources>
+        <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    </UserControl.Resources>
+
+    <Grid>
+        <mortgage:MortgagesView DataContext="{Binding MortgagesViewModel}" Margin="10"/>
+
+        <Grid Visibility="{Binding IsServerAvailable.IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <Border Background="{StaticResource WindowBackgroundBrush}" Opacity="0.7" />
+            <Border>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="Server is Unavailable" />
+                    <Button Content="Refresh" Command="{Binding RefreshCommand}" Padding="20,4" Margin="0,10,0,0"/>
+                </StackPanel>
+            </Border>
+        </Grid>
     </Grid>
-    
+
 </UserControl>
