@@ -60,7 +60,6 @@
     <Compile Include="Common\Converter\InvertBooleanConverter.cs" />
     <Compile Include="Common\ViewModel\IViewModelCommand.cs" />
     <Compile Include="Common\ViewModel\IViewModelProperty.cs" />
-    <Compile Include="Common\ViewModel\IViewModelSnapshot.cs" />
     <Compile Include="Common\ViewModel\ViewModelBase.cs" />
     <Compile Include="Common\ViewModel\ViewModelCommand.cs" />
     <Compile Include="Common\ViewModel\ViewModelProperty.cs" />

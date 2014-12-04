@@ -1,5 +1,6 @@
 ﻿using MyMortgage.RestApi.Client;
 using MyMortgage.RestApi.Common.Client;
+using MyMortgage.Wpf.Core.Common.Context;
 using MyMortgage.Wpf.Core.Common.Controllers;
 using MyMortgage.Wpf.Core.Components.Factory;
 using MyMortgage.Wpf.Core.Components.Main;
@@ -11,8 +12,6 @@ using Ninject.Modules;
 
 namespace MyMortgage.Wpf.Core
 {
-    using MyMortgage.Wpf.Core.Common.Context;
-
     public class BootstrapModule : NinjectModule
     {
         public override void Load()

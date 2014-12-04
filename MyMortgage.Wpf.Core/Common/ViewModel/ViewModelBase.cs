@@ -2,6 +2,8 @@
 
 namespace MyMortgage.Wpf.Core.Common.ViewModel
 {
+    using System.Collections.Generic;
+
     public abstract class ViewModelBase
     {
         private readonly ViewModelPropertyCollection _properties = new ViewModelPropertyCollection();
@@ -18,6 +20,11 @@ namespace MyMortgage.Wpf.Core.Common.ViewModel
         {
             get;
             private set;
+        }
+
+        public Dictionary<string, string> GetSnapshot(bool full)
+        {
+            return Properties.GetSnapshot(full);
         }
 
         protected ViewModelPropertyCollection Properties
